@@ -1,0 +1,189 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@import "./form-page.css";
+@import "./chrome.css";
+@import "./data-table.css";
+
+@theme {
+  --font-display: "Fraunces", Georgia, serif;
+  --font-sans: "Figtree", "Segoe UI", sans-serif;
+
+  --color-ink: #1a1c1e;
+  --color-ink-elevated: #25282b;
+  --color-ink-muted: #a8adb4;
+  --color-ink-line: rgba(255, 255, 255, 0.1);
+
+  --color-accent: #d97706;
+  --color-accent-hover: #b45309;
+  --color-accent-soft: #fde8c8;
+  --color-accent-text: #92400e;
+  --color-gold: #f59e0b;
+  --color-gold-soft: #fef3c7;
+
+  --color-canvas-top: #eceef0;
+  --color-canvas-bottom: #f4f5f6;
+  --color-surface: #ffffff;
+  --color-surface-muted: #f1f2f4;
+  --color-border: #d8dbe0;
+  --color-border-strong: #b8bdc4;
+
+  --color-text: #1a1c1e;
+  --color-text-secondary: #5c636b;
+  --color-text-muted: #8a929b;
+  --color-muted: #64748b;
+  --color-ink-soft: #475569;
+  --color-canvas: #f8f9fa;
+
+  --color-danger: #dc2626;
+  --color-danger-hover: #b91c1c;
+  --color-danger-bg: #fee2e2;
+  --color-danger-text: #b42318;
+
+  --color-ok: #16a34a;
+  --color-ok-hover: #15803d;
+  --color-ok-bg: #dcfce7;
+  --color-ok-text: #15803d;
+
+  --color-warn: #d97706;
+  --color-warn-hover: #b45309;
+  --color-warn-bg: #fef3c7;
+  --color-warn-text: #92400e;
+
+  --color-success-bg: #d9f5e5;
+  --color-success-text: #146c43;
+  --color-warning-bg: #fef3c7;
+  --color-warning-text: #92400e;
+  --color-info-bg: #e8edf2;
+  --color-info-text: #3d4b5c;
+  --color-neutral-bg: #e8eaed;
+  --color-neutral-text: #3f464e;
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+
+  --shadow-sm: 0 1px 2px rgba(26, 28, 30, 0.06);
+  --shadow-md: 0 8px 24px rgba(26, 28, 30, 0.1);
+
+  --animate-fade-up: fade-up 320ms ease both;
+  --animate-soft-in: soft-in 180ms ease both;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes soft-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@layer base {
+  html {
+    color-scheme: light;
+  }
+
+  body {
+    @apply m-0 bg-canvas-bottom font-sans text-text antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  a {
+    @apply text-accent;
+  }
+
+  button,
+  input,
+  select,
+  textarea {
+    font: inherit;
+  }
+
+  ::selection {
+    @apply bg-accent-soft text-accent-text;
+  }
+}
+
+.auth-loading {
+  @apply flex min-h-screen items-center justify-center text-[0.95rem] text-text-secondary;
+  background:
+    radial-gradient(ellipse 80% 50% at 10% 0%, rgba(245, 158, 11, 0.16), transparent 55%),
+    linear-gradient(165deg, var(--color-canvas-top), var(--color-canvas-bottom));
+}
+
+/* ── PWA & Mobile Ergonomics ────────────────────────────────────────── */
+:root {
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-left: env(safe-area-inset-left, 0px);
+  --safe-right: env(safe-area-inset-right, 0px);
+}
+
+html, body {
+  height: 100%;
+}
+
+#root {
+  min-height: 100dvh;
+}
+
+/* Prevent double-tap zoom delay on touch devices */
+button, a, [role="button"], input, select, textarea {
+  touch-action: manipulation;
+}
+
+/* Native scroll feel on iOS & mobile touchscreens */
+main, .scroll-area {
+  overscroll-behavior-y: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Standalone PWA adjustments */
+@media (display-mode: standalone) {
+  .pwa-install-banner {
+    display: none !important;
+  }
+}
+
+/* Form input touch optimization for small mobile devices */
+@media (max-width: 899px) {
+  input[type="text"],
+  input[type="number"],
+  input[type="tel"],
+  input[type="email"],
+  select {
+    min-height: 44px;
+    font-size: 16px; /* Prevents auto-zoom in iOS Safari */
+  }
+}
+
+/* Hide scrollbars while preserving touch scroll */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+

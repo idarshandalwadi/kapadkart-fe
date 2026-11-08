@@ -1,0 +1,41 @@
+{
+  "name": "kapadkart-fe",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "oxlint",
+    "preview": "vite preview",
+    "deploy": "npm run build && npx wrangler pages deploy dist --project-name kapadkart",
+    "test": "node scripts/test-exports.js && node scripts/test-routing-prefix.js && node scripts/test-support-security.js && node scripts/test-alert-accessibility.js && node scripts/test-modals-and-sales-flow.js",
+    "test:exports": "node scripts/test-exports.js",
+    "test:routing": "node scripts/test-routing-prefix.js",
+    "test:security": "node scripts/test-support-security.js",
+    "test:alerts": "node scripts/test-alert-accessibility.js",
+    "test:modals": "node scripts/test-modals-and-sales-flow.js"
+  },
+  "dependencies": {
+    "@tailwindcss/vite": "^4.3.3",
+    "idb": "^8.0.4",
+    "qrcode.react": "^4.2.0",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "react-easy-crop": "^6.2.3",
+    "react-router-dom": "^7.18.2",
+    "recharts": "^3.9.2",
+    "sonner": "^2.0.7",
+    "tailwindcss": "^4.3.3",
+    "workbox-window": "^7.4.1"
+  },
+  "devDependencies": {
+    "@fortawesome/fontawesome-free": "^7.3.1",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.4",
+    "oxlint": "^1.75.0",
+    "vite": "^8.2.0",
+    "vite-plugin-pwa": "^2.0.0"
+  }
+}

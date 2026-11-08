@@ -1,0 +1,11 @@
+# Cloudflare Pages project for the shop app.
+# Build env vars (Pages → Settings → Environment variables) must include:
+#   VITE_BASE_PATH=/
+#   VITE_API_BASE_URL=https://<api-host>
+# Vite inlines VITE_* at build time.
+#
+#   npm run deploy
+
+name = "kapadkart"
+compatibility_date = "2026-11-08"
+pages_build_output_dir = "./dist"

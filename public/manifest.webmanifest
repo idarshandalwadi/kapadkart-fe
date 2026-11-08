@@ -1,0 +1,61 @@
+{
+  "name": "KapadKart — Garment POS & Rental Management",
+  "short_name": "KapadKart",
+  "description": "Multi-tenant POS, Bridal/Groom Rental Booking & Inventory SaaS ERP",
+  "id": "/",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#121315",
+  "theme_color": "#d97706",
+  "lang": "en-GB",
+  "dir": "ltr",
+  "categories": ["shopping", "business", "finance", "productivity"],
+  "icons": [
+    {
+      "src": "./kk-favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icons/icon-maskable-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "./icons/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Quick POS Checkout",
+      "short_name": "POS",
+      "url": "./sales",
+      "description": "Start a new counter sale"
+    },
+    {
+      "name": "Rental Bookings",
+      "short_name": "Bookings",
+      "url": "./booking",
+      "description": "View and manage bridal & garment rental calendar"
+    }
+  ]
+}

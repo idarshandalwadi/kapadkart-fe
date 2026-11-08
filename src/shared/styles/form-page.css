@@ -1,0 +1,163 @@
+@layer components {
+  .product-form-page {
+    @apply flex flex-col gap-[1.35rem] max-w-[960px] animate-fade-up;
+  }
+
+  .product-form-header {
+    @apply flex items-end justify-between gap-4 flex-wrap;
+  }
+
+  .product-form-header-aside {
+    @apply flex flex-col items-end gap-[0.55rem];
+  }
+
+  .booking-bill-no {
+    @apply m-0 flex flex-col items-end gap-[0.15rem];
+  }
+
+  .booking-bill-no-label {
+    @apply text-[0.7rem] font-bold tracking-[0.06em] uppercase text-text-muted;
+  }
+
+  .booking-bill-no-value {
+    @apply font-display text-base font-bold;
+  }
+
+  .product-form-back {
+    @apply text-[0.9rem] font-bold tracking-[0.05em] text-accent no-underline transition-colors duration-160 hover:text-accent-hover hover:underline;
+  }
+
+  .product-form-loading {
+    @apply py-8 text-text-secondary;
+  }
+
+  .product-form {
+    @apply flex flex-col gap-[1.1rem] p-3.5 sm:p-5 md:p-[1.45rem] bg-surface border border-border rounded-xl sm:rounded-2xl shadow-md overflow-visible;
+  }
+
+  .product-form-grid {
+    @apply grid grid-cols-1 gap-3.5 sm:gap-4 sm:grid-cols-2;
+  }
+
+  .form-field {
+    @apply flex flex-col gap-[0.4rem] w-full min-w-0;
+
+    label {
+      @apply text-[0.8rem] font-semibold text-text-secondary select-none;
+
+      .required {
+        @apply font-bold text-[#dc2626];
+      }
+    }
+
+    input:not([role='combobox']):not([type='checkbox']):not([type='radio']):not([type='range']),
+    select {
+      @apply h-[2.65rem] min-h-[2.65rem] w-full box-border rounded-[9px] border border-border px-3 py-[0.55rem] text-[0.9rem] [font-family:inherit] font-normal text-text bg-white transition-[border-color,box-shadow] duration-160 focus:outline-none focus:border-accent focus:shadow-[0_0_0_3px_rgba(217,119,6,0.28)];
+      -webkit-appearance: none;
+      appearance: none;
+    }
+
+    input[type='range'] {
+      @apply h-2 w-full cursor-pointer rounded-lg bg-neutral-200 accent-accent;
+      -webkit-appearance: auto;
+      appearance: auto;
+    }
+
+    input[type='checkbox'] {
+      @apply size-[1.15rem] cursor-pointer rounded accent-accent;
+      -webkit-appearance: checkbox;
+      appearance: auto;
+    }
+
+    input[type='radio'] {
+      @apply size-[1.15rem] cursor-pointer accent-accent;
+      -webkit-appearance: radio;
+      appearance: auto;
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+      @apply text-text-muted font-normal opacity-90;
+    }
+
+    textarea {
+      @apply min-h-[5.5rem] w-full box-border rounded-[9px] border border-border p-3 text-[0.9rem] [font-family:inherit] font-normal text-text bg-white transition-[border-color,box-shadow] duration-160 focus:outline-none focus:border-accent focus:shadow-[0_0_0_3px_rgba(217,119,6,0.28)];
+      -webkit-appearance: none;
+      appearance: none;
+    }
+
+    /* Prevent mobile / iOS PWA auto-zoom when focusing inputs */
+    @media (max-width: 640px) {
+      input:not([role='combobox']):not([type='checkbox']):not([type='radio']):not([type='range']),
+      select,
+      textarea {
+        font-size: 16px;
+      }
+    }
+
+    input.input-readonly:not([role='combobox']):not([type='checkbox']):not([type='radio']):not([type='range']),
+    textarea.input-readonly {
+      @apply bg-surface-muted text-text-secondary cursor-not-allowed focus:border-border focus:shadow-none;
+    }
+
+    select {
+      @apply pr-9;
+    }
+
+    input[role='combobox'] {
+      @apply m-0 rounded-none border-0 bg-transparent p-0 shadow-none outline-none ring-0 focus:border-0 focus:shadow-none focus:outline-none focus:ring-0;
+    }
+
+    input[aria-invalid='true']:not([role='combobox']):not([type='checkbox']):not([type='radio']):not([type='range']),
+    select[aria-invalid='true'],
+    textarea[aria-invalid='true'] {
+      @apply border-danger-text bg-white focus:border-danger-text focus:shadow-[0_0_0_3px_rgba(180,35,24,0.2)];
+    }
+
+    &.has-error {
+      input:not([role='combobox']):not([type='checkbox']):not([type='radio']):not([type='range']):not([aria-invalid='false']),
+      select:not([aria-invalid='false']),
+      textarea:not([aria-invalid='false']) {
+        @apply border-danger-text bg-white focus:border-danger-text focus:shadow-[0_0_0_3px_rgba(180,35,24,0.2)];
+      }
+    }
+  }
+
+  .form-field-full {
+    @apply col-span-full;
+  }
+
+  .field-error {
+    @apply m-0 text-[0.78rem] font-semibold text-danger-text break-words animate-soft-in;
+  }
+
+  .product-form-actions {
+    @apply flex justify-end gap-3 flex-wrap;
+  }
+
+  @media (max-width: 540px) {
+    .product-form-actions {
+      @apply flex-col-reverse items-stretch w-full;
+
+      & > * {
+        @apply w-full text-center justify-center;
+      }
+    }
+  }
+
+  .product-form-cancel {
+    @apply inline-flex items-center justify-center h-[2.65rem] rounded-[9px] border border-border px-[1.1rem] text-[0.9rem] font-semibold text-text no-underline bg-white transition-[background,border-color] duration-160 hover:bg-surface-muted hover:border-border-strong;
+  }
+
+  .product-form-print {
+    @apply inline-flex items-center justify-center h-[2.65rem] rounded-[9px] border border-border-strong px-[1.1rem] text-[0.9rem] font-semibold text-text bg-white cursor-pointer transition-[background,border-color] duration-160 enabled:hover:bg-surface-muted enabled:hover:border-accent disabled:opacity-60 disabled:cursor-not-allowed;
+  }
+
+  .product-form-submit {
+    @apply inline-flex items-center justify-center h-[2.65rem] rounded-[9px] border-0 px-[1.25rem] text-[0.9rem] font-bold text-white cursor-pointer bg-[linear-gradient(135deg,#fbbf24_0%,#f59e0b_55%,#d97706_100%)] shadow-[0_6px_14px_rgba(217,119,6,0.28)] enabled:hover:brightness-[1.03] disabled:opacity-60 disabled:cursor-not-allowed;
+  }
+
+  .input-readonly {
+    @apply bg-surface-muted text-text-secondary cursor-not-allowed;
+  }
+}

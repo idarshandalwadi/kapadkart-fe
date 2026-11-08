@@ -1,0 +1,1516 @@
+/* ================================================================== */
+/*  Unified Invoice Stylesheet — KapadKart (Preview & Print)         */
+/* ================================================================== */
+
+/* ── Hidden by default in standard browser DOM ───────────────────── */
+.booking-bill-print,
+.sale-bill-print {
+  display: none;
+}
+
+/* ================================================================== */
+/*  1. ON-SCREEN PREVIEW (Settings → Billing Template)               */
+/* ================================================================== */
+.bill-print-preview.booking-bill-print,
+.bill-print-preview.sale-bill-print {
+  display: block;
+  width: 100%;
+  max-width: 210mm;
+  margin: 0 auto;
+  padding: 1.25rem 1.35rem;
+  background: #ffffff;
+  color: #111111;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  font-family: 'Figtree', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  font-size: 0.88rem;
+  line-height: 1.35;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+}
+
+@media (max-width: 640px) {
+  .bill-print-preview.booking-bill-print,
+  .bill-print-preview.sale-bill-print {
+    padding: 0.85rem 0.65rem;
+    font-size: 0.8rem;
+    border-radius: 8px;
+  }
+}
+
+.bill-print-preview .bill-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  padding-bottom: 0.55rem;
+  margin-bottom: 0.65rem;
+  border-bottom: 1.5px solid #111111;
+}
+
+.bill-print-preview .bill-brand {
+  flex: 1 1 58%;
+}
+
+.bill-print-preview .bill-brand h1 {
+  margin: 0 0 0.2rem;
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #111111;
+  letter-spacing: -0.01em;
+}
+
+.bill-print-preview .bill-logo {
+  display: block;
+  max-height: 72px;
+  max-width: 220px;
+  width: auto;
+  object-fit: contain;
+  margin-bottom: 0.35rem;
+}
+
+.bill-print-preview .bill-brand p,
+.bill-print-preview .bill-meta p {
+  margin: 0.1rem 0;
+  font-size: 0.8rem;
+  color: #444444;
+}
+
+.bill-print-preview .bill-header-note,
+.bill-print-preview .bill-footer-note {
+  margin: 0.2rem 0 0;
+  font-size: 0.75rem;
+  color: #555555;
+  white-space: pre-wrap;
+}
+
+.bill-print-preview .bill-meta {
+  text-align: right;
+  min-width: 9.5rem;
+}
+
+.bill-print-preview .bill-title {
+  margin-bottom: 0.25rem !important;
+  font-size: 0.92rem !important;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #111111;
+}
+
+/* Status pill */
+.bill-print-preview .bill-status-pill,
+.booking-bill-print .bill-status-pill,
+.sale-bill-print .bill-status-pill {
+  display: inline-block;
+  padding: 1px 6px;
+  border-radius: 9999px;
+  font-size: 0.64rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.bill-status-pill--completed {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.bill-status-pill--cancelled {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.bill-status-pill--reserved,
+.bill-status-pill--pending {
+  background: #fef3c7;
+  color: #b45309;
+}
+
+.bill-status-pill--sent,
+.bill-status-pill--picked_up {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+.bill-status-pill--returned,
+.bill-status-pill--partially_returned {
+  background: #f3e8ff;
+  color: #7c3aed;
+}
+
+/* Sections */
+.bill-print-preview .bill-section {
+  margin-bottom: 0.65rem;
+}
+
+.bill-print-preview .bill-section h2 {
+  margin: 0 0 0.25rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #444444;
+}
+
+.bill-print-preview .bill-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.25rem 1rem;
+}
+
+.bill-print-preview .bill-grid p {
+  margin: 0;
+  font-size: 0.84rem;
+  color: #111111;
+}
+
+.bill-print-preview .bill-grid span {
+  display: block;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #666666;
+}
+
+.bill-print-preview .bill-span-2 {
+  grid-column: 1 / -1;
+}
+
+/* Tables */
+.bill-print-preview .bill-items-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8rem;
+  margin-bottom: 0.25rem;
+}
+
+.bill-print-preview .bill-items-table th,
+.bill-print-preview .bill-items-table td {
+  padding: 0.28rem 0.35rem;
+  border-bottom: 1px solid #dddddd;
+  text-align: left;
+  vertical-align: top;
+}
+
+.bill-print-preview .bill-items-table thead th {
+  background: #f2f2f2;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #111111;
+  border-bottom: 1px solid #dddddd;
+}
+
+.bill-print-preview .bill-items-table th:not(:first-child),
+.bill-print-preview .bill-items-table td:not(:first-child) {
+  text-align: right;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.bill-print-preview .bill-item-accessories-box {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.25rem 0.35rem;
+  margin-top: 0.25rem;
+}
+
+.bill-print-preview .bill-accessories-heading {
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: #4b5563;
+  margin-right: 0.1rem;
+}
+
+.bill-print-preview .bill-accessories-chips {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.22rem 0.3rem;
+}
+
+.bill-print-preview .bill-accessory-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.18rem;
+  padding: 0.08rem 0.35rem;
+  background-color: #f3f4f6;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  font-size: 0.68rem;
+  line-height: 1.25;
+  color: #1f2937;
+  white-space: nowrap;
+}
+
+.bill-print-preview .bill-accessory-tag {
+  font-weight: 600;
+  color: #4b5563;
+}
+
+.bill-print-preview .bill-accessory-val {
+  font-weight: 700;
+  color: #111827;
+}
+
+.bill-print-preview .bill-item-accessories {
+  display: block;
+  margin-top: 0.15rem;
+  font-size: 0.72rem;
+  font-weight: 500;
+  line-height: 1.3;
+  color: #555555;
+  white-space: normal;
+  text-align: left;
+}
+
+.bill-print-preview .bill-products {
+  margin-top: 0.25rem;
+  padding: 0.35rem 0.5rem;
+  border: 1px solid #cccccc;
+}
+
+.bill-print-preview .bill-products p {
+  margin: 0;
+  white-space: pre-wrap;
+  font-size: 0.8rem;
+}
+
+.bill-print-preview .bill-accessories {
+  padding: 0.45rem 0.6rem 0.5rem;
+  border: 1px solid #e4e4e4;
+  border-radius: 8px;
+  background: #fafafa;
+}
+
+.bill-print-preview .bill-accessories-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.35rem 0.8rem;
+}
+
+/* Amounts Panel */
+.bill-print-preview .bill-amounts {
+  margin-top: 0.75rem;
+  padding-top: 0.6rem;
+  border-top: 1px solid #dddddd;
+}
+
+.bill-print-preview .bill-amounts-panel {
+  width: 100%;
+  max-width: 15rem;
+  margin-left: auto;
+}
+
+.bill-print-preview .bill-amounts-panel h2 {
+  margin-bottom: 0.3rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #444444;
+}
+
+.bill-print-preview .bill-amounts-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+  color: #111111;
+}
+
+.bill-print-preview .bill-amounts td {
+  padding: 0.18rem 0;
+  border-bottom: 1px solid #dddddd;
+  color: #111111;
+}
+
+.bill-print-preview .bill-amounts td:last-child {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+}
+
+.bill-print-preview .bill-discount td {
+  color: #b91c1c !important;
+}
+
+.bill-print-preview .bill-final td {
+  font-size: 0.92rem;
+  font-weight: 700 !important;
+  color: #111111;
+  padding-top: 0.25rem;
+  border-bottom: none;
+}
+
+.bill-print-preview .bill-paid td {
+  color: #15803d !important;
+  font-weight: 700;
+  border-bottom: none;
+}
+
+.bill-print-preview .bill-due td {
+  padding-top: 0.22rem;
+  border-bottom: none;
+  font-weight: 700 !important;
+  font-size: 0.92rem;
+  color: #b45309 !important;
+}
+
+.bill-print-preview .bill-deposit-note {
+  margin-top: 0.35rem;
+  padding: 0.45rem 0.6rem;
+  border: 1px dashed #999999;
+  border-radius: 8px;
+  background: #fafafa;
+}
+
+.bill-print-preview .bill-deposit-note p {
+  margin: 0;
+  font-size: 0.78rem;
+  color: #333333;
+}
+
+/* UPI QR & Social */
+.bill-print-preview .bill-upi-block,
+.booking-bill-print .bill-upi-block,
+.sale-bill-print .bill-upi-block {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.75rem;
+  margin-top: 0.6rem;
+  padding: 0.5rem 0.65rem;
+  border: 1px dashed #bbbbbb;
+  border-radius: 8px;
+  background: #fafafa;
+  color: #111111;
+}
+
+.bill-print-preview .bill-upi-block-with-social,
+.booking-bill-print .bill-upi-block-with-social,
+.sale-bill-print .bill-upi-block-with-social {
+  justify-content: space-between;
+}
+
+.bill-print-preview .bill-upi-pay,
+.booking-bill-print .bill-upi-pay,
+.sale-bill-print .bill-upi-pay {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-width: 0;
+}
+
+.bill-print-preview .bill-upi-missing,
+.booking-bill-print .bill-upi-missing,
+.sale-bill-print .bill-upi-missing {
+  align-items: flex-start;
+}
+
+.bill-print-preview .bill-upi-missing:not(.bill-upi-block-with-social) .bill-upi-pay,
+.booking-bill-print .bill-upi-missing:not(.bill-upi-block-with-social) .bill-upi-pay,
+.sale-bill-print .bill-upi-missing:not(.bill-upi-block-with-social) .bill-upi-pay {
+  display: block;
+}
+
+.bill-print-preview .bill-upi-qr,
+.booking-bill-print .bill-upi-qr,
+.sale-bill-print .bill-upi-qr {
+  flex-shrink: 0;
+  line-height: 0;
+  padding: 0.2rem;
+  background: #ffffff;
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+}
+
+.bill-print-preview .bill-upi-qr svg,
+.booking-bill-print .bill-upi-qr svg,
+.sale-bill-print .bill-upi-qr svg {
+  display: block;
+  width: 90px;
+  height: 90px;
+}
+
+.bill-print-preview .bill-upi-meta,
+.booking-bill-print .bill-upi-meta,
+.sale-bill-print .bill-upi-meta {
+  text-align: left;
+  min-width: 0;
+}
+
+.bill-print-preview .bill-upi-label,
+.booking-bill-print .bill-upi-label,
+.sale-bill-print .bill-upi-label {
+  margin: 0 0 0.15rem;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #555555;
+}
+
+.bill-print-preview .bill-upi,
+.booking-bill-print .bill-upi,
+.sale-bill-print .bill-upi {
+  margin: 0;
+  font-size: 0.78rem;
+  color: #111111;
+  word-break: break-all;
+}
+
+.bill-print-preview .bill-upi-amount-hint,
+.booking-bill-print .bill-upi-amount-hint,
+.sale-bill-print .bill-upi-amount-hint {
+  margin: 0.15rem 0 0;
+  font-size: 0.68rem;
+  color: #666666;
+}
+
+.bill-print-preview .bill-social-qrs,
+.booking-bill-print .bill-social-qrs,
+.sale-bill-print .bill-social-qrs {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
+.bill-print-preview .bill-social-qr,
+.booking-bill-print .bill-social-qr,
+.sale-bill-print .bill-social-qr {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+}
+
+.bill-print-preview .bill-social-qr .bill-upi-label,
+.booking-bill-print .bill-social-qr .bill-upi-label,
+.sale-bill-print .bill-social-qr .bill-upi-label {
+  margin: 0;
+  text-align: center;
+}
+
+.bill-print-preview .bill-social-qr-code svg,
+.booking-bill-print .bill-social-qr-code svg,
+.sale-bill-print .bill-social-qr-code svg {
+  width: 70px;
+  height: 70px;
+}
+
+/* Notes & Terms */
+.bill-print-preview .bill-notes,
+.bill-print-preview .bill-terms p {
+  margin: 0;
+  white-space: pre-wrap;
+  font-size: 0.76rem;
+  line-height: 1.35;
+  word-break: break-word;
+  color: #444444;
+}
+
+.bill-print-preview .bill-terms {
+  margin-top: 0.65rem;
+  padding-top: 0.45rem;
+  border-top: 1px dashed #cccccc;
+}
+
+/* Footer & Signature */
+.bill-print-preview .bill-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 1rem;
+  margin-top: 0.85rem;
+  padding-top: 0.4rem;
+  border-top: 1px dashed #cccccc;
+}
+
+.bill-print-preview .bill-footer-left {
+  flex: 1 1 auto;
+}
+
+.bill-print-preview .bill-footer-thankyou {
+  margin: 0;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #111111;
+}
+
+.bill-print-preview .bill-footer-contact {
+  margin: 0.15rem 0 0;
+  font-size: 0.72rem;
+  color: #666666;
+}
+
+.bill-print-preview .bill-sign {
+  min-width: 8.5rem;
+  padding-top: 1.4rem;
+  border-top: 1px solid #111111;
+  text-align: center;
+  font-size: 0.72rem;
+  color: #444444;
+}
+
+/* Software Branding Footer */
+.bill-print-preview .bill-software-branding,
+.booking-bill-print .bill-software-branding,
+.sale-bill-print .bill-software-branding {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.85rem;
+  padding-top: 0.45rem;
+  border-top: 1px solid #e2e8f0;
+  font-size: 0.72rem;
+  color: #64748b;
+}
+
+.bill-software-branding-left {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.bill-software-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 15px;
+  height: 15px;
+  border-radius: 3px;
+  background-color: #d97706;
+  color: #ffffff;
+  font-weight: 800;
+  font-size: 0.65rem;
+  line-height: 1;
+}
+
+.bill-software-title {
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.bill-software-tagline {
+  color: #64748b;
+  font-weight: 500;
+}
+
+.bill-software-branding-right {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.68rem;
+  color: #475569;
+}
+
+.bill-digital-link-label {
+  font-weight: 600;
+  color: #64748b;
+}
+
+.bill-digital-link-url {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  color: #0f172a;
+  text-decoration: underline;
+  max-width: 280px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Preview Product Images */
+.bill-print-preview .bill-product-images-page {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 2px dashed #dddddd;
+}
+
+.bill-print-preview .bill-product-images-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #1e293b;
+  padding-bottom: 0.35rem;
+  margin-bottom: 0.75rem;
+}
+
+.bill-print-preview .bill-product-images-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.bill-print-preview .bill-product-images-header h2 {
+  margin: 0;
+  font-size: 0.85rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #0f172a;
+}
+
+.bill-print-preview .bill-product-images-badge {
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #475569;
+  background: #f1f5f9;
+  padding: 0.1rem 0.45rem;
+  border-radius: 9999px;
+  border: 1px solid #e2e8f0;
+}
+
+.bill-print-preview .bill-product-images-meta {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #334155;
+  background: #f8fafc;
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+  border: 1px solid #e2e8f0;
+}
+
+.bill-print-preview .bill-product-images-grid {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.bill-print-preview .bill-product-images-grid--single {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.bill-print-preview .bill-product-images-grid--single .bill-product-image-card {
+  max-width: 620px;
+  width: 100%;
+}
+
+.bill-print-preview .bill-product-images-grid--single .bill-product-image-wrapper {
+  height: 520px;
+  min-height: 400px;
+}
+
+.bill-print-preview .bill-product-images-grid--single .bill-product-image-card img {
+  max-height: 500px;
+}
+
+.bill-print-preview .bill-product-images-grid--double {
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+  width: 100%;
+}
+
+.bill-print-preview .bill-product-images-grid--double .bill-product-image-wrapper {
+  height: 480px;
+  min-height: 380px;
+}
+
+.bill-print-preview .bill-product-images-grid--double .bill-product-image-card img {
+  max-height: 460px;
+}
+
+.bill-print-preview .bill-product-images-grid--quad {
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.bill-print-preview .bill-product-images-grid--quad .bill-product-image-wrapper {
+  height: 320px;
+  min-height: 260px;
+}
+
+.bill-print-preview .bill-product-images-grid--quad .bill-product-image-card img {
+  max-height: 305px;
+}
+
+.bill-print-preview .bill-product-image-card {
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 0.6rem;
+  text-align: center;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.bill-print-preview .bill-product-image-wrapper {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f8fafc;
+  border-radius: 7px;
+  overflow: hidden;
+  padding: 0.4rem;
+  box-sizing: border-box;
+}
+
+.bill-print-preview .bill-product-image-card img {
+  max-width: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.bill-print-preview .bill-product-image-info {
+  margin-top: 0.45rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.bill-print-preview .bill-product-image-title {
+  margin: 0;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.bill-print-preview .bill-product-image-code {
+  display: inline-block;
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: #475569;
+  background: #f1f5f9;
+  padding: 0.08rem 0.4rem;
+  border-radius: 4px;
+  border: 1px solid #e2e8f0;
+}
+
+
+/* ================================================================== */
+/*  2. BROWSER PRINT / SAVE AS PDF (@media print)                    */
+/* ================================================================== */
+@media print {
+  @page {
+    size: A4;
+    margin: 8mm;
+  }
+
+  html,
+  body {
+    background: #ffffff !important;
+    color: #111111 !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* Completely remove standard app UI from print flow */
+  body>* {
+    display: none !important;
+  }
+
+  /* Only display the portaled bill component */
+  body>.booking-bill-print,
+  body>.sale-bill-print,
+  body>.listing-print-report {
+    display: block !important;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: auto;
+    padding: 0;
+    margin: 0;
+    background: #ffffff;
+    color: #111111;
+    font-family: 'Figtree', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+    font-size: 9pt;
+    line-height: 1.22;
+    page-break-after: avoid;
+    break-after: avoid;
+  }
+
+  .booking-bill-print *,
+  .sale-bill-print * {
+    visibility: visible !important;
+  }
+
+  /* ── Header ────────────────────────────────────────── */
+  .bill-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 0.8rem;
+    padding-bottom: 0.4rem;
+    margin-bottom: 0.45rem;
+    border-bottom: 1.5px solid #111111;
+  }
+
+  .bill-brand {
+    flex: 1 1 58%;
+  }
+
+  .bill-brand h1 {
+    margin: 0 0 0.15rem;
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #111111;
+  }
+
+  .bill-logo {
+    display: block;
+    max-height: 65px;
+    max-width: 200px;
+    width: auto;
+    object-fit: contain;
+    margin-bottom: 0.25rem;
+  }
+
+  .bill-header-note,
+  .bill-footer-note {
+    margin: 0.1rem 0 0;
+    font-size: 0.68rem;
+    color: #444444;
+    white-space: pre-wrap;
+  }
+
+  .bill-brand p,
+  .bill-meta p {
+    margin: 0.06rem 0;
+    font-size: 0.74rem;
+    color: #444444;
+  }
+
+  .bill-meta {
+    text-align: right;
+    min-width: 9rem;
+  }
+
+  .bill-title {
+    margin-bottom: 0.2rem !important;
+    font-size: 0.88rem !important;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: #111111;
+  }
+
+  /* ── Sections ──────────────────────────────────────── */
+  .bill-section {
+    margin-bottom: 0.4rem;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  .bill-section h2 {
+    margin: 0 0 0.2rem;
+    font-size: 0.64rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #444444;
+  }
+
+  .bill-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.15rem 0.8rem;
+  }
+
+  .bill-grid p {
+    margin: 0;
+    font-size: 0.78rem;
+    color: #111111;
+  }
+
+  .bill-grid span {
+    display: block;
+    font-size: 0.58rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: #666666;
+  }
+
+  .bill-span-2 {
+    grid-column: 1 / -1;
+  }
+
+  .bill-products {
+    margin-top: 0.25rem;
+    padding: 0.3rem 0.45rem;
+    border: 1px solid #cccccc;
+  }
+
+  .bill-products p {
+    margin: 0;
+    white-space: pre-wrap;
+    font-size: 0.76rem;
+  }
+
+  /* ── Items Table ───────────────────────────────────── */
+  .bill-items-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.74rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .bill-items-table th,
+  .bill-items-table td {
+    padding: 0.18rem 0.25rem;
+    border-bottom: 1px solid #dddddd;
+    text-align: left;
+    vertical-align: top;
+  }
+
+  .bill-items-table thead th {
+    background: #f2f2f2;
+    font-size: 0.58rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: #111111;
+    border-bottom: 1px solid #dddddd;
+  }
+
+  .bill-items-table th:not(:first-child),
+  .bill-items-table td:not(:first-child) {
+    text-align: right;
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .bill-items-table th:nth-child(2),
+  .bill-items-table td:nth-child(2) {
+    width: 2.2rem;
+  }
+
+  .bill-item-accessories-box {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.15rem 0.25rem;
+    margin-top: 0.15rem;
+  }
+
+  .bill-accessories-heading {
+    font-size: 0.62rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: #374151;
+    margin-right: 0.08rem;
+  }
+
+  .bill-accessories-chips {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.15rem 0.22rem;
+  }
+
+  .bill-accessory-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.14rem;
+    padding: 0.04rem 0.28rem;
+    background-color: #f3f4f6 !important;
+    border: 0.75px solid #d1d5db !important;
+    border-radius: 3px;
+    font-size: 0.62rem;
+    line-height: 1.2;
+    color: #111827 !important;
+    white-space: nowrap;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .bill-accessory-tag {
+    font-weight: 600;
+    color: #374151 !important;
+  }
+
+  .bill-accessory-val {
+    font-weight: 700;
+    color: #000000 !important;
+  }
+
+  .bill-item-accessories {
+    display: block;
+    margin-top: 0.08rem;
+    font-size: 0.66rem;
+    font-weight: 500;
+    line-height: 1.3;
+    color: #444444;
+    white-space: normal;
+    text-align: left;
+  }
+
+  .bill-accessories-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0.25rem 0.7rem;
+  }
+
+  .bill-accessories {
+    padding: 0.3rem 0.45rem 0.4rem;
+    border: 1px solid #dddddd;
+    background: #fafafa;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  .bill-accessories h2 {
+    margin-bottom: 0.25rem;
+  }
+
+  /* ── Payment Summary ───────────────────────────────── */
+  .bill-amounts {
+    margin-top: 0.5rem;
+    padding-top: 0.4rem;
+    border-top: 1px solid #cccccc;
+  }
+
+  .bill-amounts-panel {
+    width: 100%;
+    max-width: 13rem;
+    margin-left: auto;
+  }
+
+  .bill-amounts-panel h2 {
+    margin-bottom: 0.2rem;
+    font-size: 0.64rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #444444;
+  }
+
+  .bill-amounts-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.78rem;
+    color: #111111;
+  }
+
+  .bill-amounts td {
+    padding: 0.14rem 0;
+    border-bottom: 1px solid #dddddd;
+    color: #111111;
+  }
+
+  .bill-amounts td:last-child {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+    font-weight: 600;
+  }
+
+  .bill-discount td {
+    color: #b91c1c !important;
+  }
+
+  .bill-final td {
+    font-size: 0.88rem;
+    font-weight: 700 !important;
+    color: #111111;
+    padding-top: 0.22rem;
+    border-bottom: none;
+  }
+
+  .bill-paid td {
+    color: #15803d !important;
+    font-weight: 700;
+    border-bottom: none;
+  }
+
+  .bill-due td {
+    padding-top: 0.22rem;
+    border-bottom: none;
+    font-weight: 700 !important;
+    font-size: 0.88rem;
+    color: #b45309 !important;
+  }
+
+  .bill-deposit-note {
+    margin-top: 0.3rem;
+    padding: 0.3rem 0.45rem;
+    border: 1px dashed #888888;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  .bill-deposit-note p {
+    margin: 0;
+    font-size: 0.74rem;
+    color: #333333;
+  }
+
+  /* ── UPI QR ────────────────────────────────────────── */
+  .bill-upi-block {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0.5rem;
+    margin-top: 0.35rem;
+    padding: 0.3rem 0.45rem;
+    border: 1px dashed #999999;
+    background: #ffffff;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    color: #111111;
+  }
+
+  .bill-upi-block-with-social {
+    justify-content: space-between;
+  }
+
+  .bill-upi-pay {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-width: 0;
+  }
+
+  .bill-upi-missing {
+    align-items: flex-start;
+  }
+
+  .bill-upi-missing:not(.bill-upi-block-with-social) .bill-upi-pay {
+    display: block;
+  }
+
+  .bill-upi-qr {
+    flex-shrink: 0;
+    line-height: 0;
+    padding: 0.12rem;
+    background: #ffffff;
+    border: 1px solid #cccccc;
+  }
+
+  .bill-upi-qr svg {
+    display: block;
+    width: 82px !important;
+    height: 82px !important;
+  }
+
+  .bill-upi-meta {
+    text-align: left;
+    min-width: 0;
+  }
+
+  .bill-upi-label {
+    margin: 0 0 0.1rem;
+    font-size: 0.58rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #555555;
+  }
+
+  .bill-upi {
+    margin: 0;
+    text-align: left;
+    font-size: 0.7rem;
+    color: #111111;
+    word-break: break-all;
+  }
+
+  .bill-upi-amount-hint {
+    margin: 0.08rem 0 0;
+    font-size: 0.6rem;
+    color: #666666;
+  }
+
+  .bill-social-qrs {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    flex-shrink: 0;
+    margin-left: auto;
+  }
+
+  .bill-social-qr {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.08rem;
+  }
+
+  .bill-social-qr .bill-upi-label {
+    margin: 0;
+    text-align: center;
+  }
+
+  .bill-social-qr-code svg {
+    width: 62px !important;
+    height: 62px !important;
+  }
+
+  .bill-notes,
+  .bill-terms p {
+    margin: 0;
+    white-space: pre-wrap;
+    font-size: 0.68rem;
+    line-height: 1.35;
+    word-break: break-word;
+    color: #333333;
+  }
+
+  .bill-terms {
+    margin-top: 0.4rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .bill-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 0.8rem;
+    margin-top: 0.5rem;
+    padding-top: 0.25rem;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    border-top: 1px dashed #999999;
+  }
+
+  .bill-footer-left {
+    flex: 1 1 auto;
+  }
+
+  .bill-footer-thankyou {
+    margin: 0;
+    font-size: 0.74rem;
+    font-weight: 700;
+    color: #111111;
+  }
+
+  .bill-footer-contact {
+    margin: 0.08rem 0 0;
+    font-size: 0.68rem;
+    color: #666666;
+  }
+
+  .bill-sign {
+    min-width: 8rem;
+    padding-top: 1.2rem;
+    border-top: 1px solid #111111;
+    text-align: center;
+    font-size: 0.66rem;
+    color: #444444;
+  }
+
+  /* ── Attached Product Images Pages (Hidden during in-app print) ── */
+  .bill-product-images-page {
+    display: none !important;
+  }
+
+  .bill-product-images-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #1e293b;
+    padding-bottom: 0.35rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .bill-product-images-title-wrap {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .bill-product-images-header h2 {
+    margin: 0;
+    font-size: 0.85rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #0f172a;
+  }
+
+  .bill-product-images-badge {
+    font-size: 0.68rem;
+    font-weight: 700;
+    color: #475569;
+    background: #f1f5f9;
+    padding: 0.1rem 0.45rem;
+    border-radius: 9999px;
+    border: 1px solid #e2e8f0;
+  }
+
+  .bill-product-images-meta {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #334155;
+    background: #f8fafc;
+    padding: 0.15rem 0.5rem;
+    border-radius: 4px;
+    border: 1px solid #e2e8f0;
+  }
+
+  .bill-product-images-grid {
+    display: grid;
+    gap: 0.85rem;
+    flex: 1;
+    width: 100%;
+  }
+
+  .bill-product-images-grid--single {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.75rem 0;
+  }
+
+  .bill-product-images-grid--single .bill-product-image-card {
+    max-width: 640px;
+    width: 100%;
+    padding: 0.85rem;
+  }
+
+  .bill-product-images-grid--single .bill-product-image-wrapper {
+    height: 220mm;
+    max-height: 225mm;
+    min-height: 480px;
+  }
+
+  .bill-product-images-grid--single .bill-product-image-card img {
+    max-height: 215mm;
+  }
+
+  .bill-product-images-grid--double {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+    align-items: start;
+    width: 100%;
+  }
+
+  .bill-product-images-grid--double .bill-product-image-card {
+    padding: 0.75rem;
+    width: 100%;
+  }
+
+  .bill-product-images-grid--double .bill-product-image-wrapper {
+    height: 215mm;
+    max-height: 220mm;
+    min-height: 440px;
+  }
+
+  .bill-product-images-grid--double .bill-product-image-card img {
+    max-height: 208mm;
+  }
+
+  .bill-product-images-grid--quad {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 0.5rem;
+    width: 100%;
+  }
+
+  .bill-product-images-grid--quad .bill-product-image-card {
+    padding: 0.5rem;
+    width: 100%;
+  }
+
+  .bill-product-images-grid--quad .bill-product-image-wrapper {
+    height: 105mm;
+    max-height: 108mm;
+    min-height: 300px;
+  }
+
+  .bill-product-images-grid--quad .bill-product-image-card img {
+    max-height: 100mm;
+  }
+
+  .bill-product-image-card {
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 0.6rem;
+    text-align: center;
+    background: #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  .bill-product-image-wrapper {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f8fafc;
+    border-radius: 7px;
+    overflow: hidden;
+    padding: 0.4rem;
+    box-sizing: border-box;
+  }
+
+  .bill-product-image-card img {
+    max-width: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    display: block;
+  }
+
+  .bill-product-image-info {
+    margin-top: 0.45rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.2rem;
+  }
+
+  .bill-product-image-title {
+    margin: 0;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #1e293b;
+    line-height: 1.25;
+    text-align: center;
+  }
+
+  .bill-product-image-code {
+    display: inline-block;
+    font-size: 0.68rem;
+    font-weight: 600;
+    color: #475569;
+    background: #f1f5f9;
+    padding: 0.08rem 0.4rem;
+    border-radius: 4px;
+    border: 1px solid #e2e8f0;
+    letter-spacing: 0.02em;
+  }
+
+  .bill-software-branding {
+    break-inside: avoid;
+    page-break-inside: avoid;
+    margin-top: 0.5rem;
+    padding-top: 0.35rem;
+    border-top: 1px solid #cbd5e1;
+    font-size: 0.68rem;
+  }
+
+  html.listing-print-only,
+  body.listing-print-only {
+    overflow: visible !important;
+    height: auto !important;
+  }
+}

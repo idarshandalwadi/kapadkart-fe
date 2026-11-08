@@ -1,0 +1,95 @@
+@layer components {
+  .data-table-wrap {
+    @apply overflow-x-auto rounded-2xl border border-border bg-surface shadow-md [-webkit-overflow-scrolling:touch];
+  }
+
+  .data-table {
+    @apply w-full border-separate border-spacing-0 text-[0.875rem];
+
+    th,
+    td {
+      @apply border-b border-border px-[0.85rem] py-[0.9rem] text-left align-top;
+    }
+
+    th {
+      @apply whitespace-nowrap bg-[linear-gradient(180deg,#2a2e33,#23272c)] text-[0.68rem] font-bold tracking-[0.05em] text-[#fbbf24] uppercase;
+    }
+
+    th:first-child {
+      @apply rounded-tl-[15px];
+    }
+
+    th:last-child {
+      @apply rounded-tr-[15px];
+    }
+
+    th.sortable {
+      @apply p-0;
+    }
+
+    tbody tr {
+      @apply transition-colors duration-160;
+    }
+
+    tbody tr:hover {
+      @apply bg-[rgba(245,158,11,0.07)];
+    }
+
+    tbody tr:last-child td {
+      @apply border-b-0;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .data-table-wrap {
+      @apply overflow-visible rounded-none border-0 bg-transparent shadow-none;
+    }
+
+    .data-table {
+      @apply block min-w-0!;
+    }
+
+    .data-table thead {
+      @apply hidden;
+    }
+
+    .data-table tbody {
+      @apply flex flex-col gap-[0.85rem];
+    }
+
+    .data-table tr {
+      @apply block rounded-2xl border border-border bg-surface p-[0.95rem] shadow-sm;
+    }
+
+    .data-table td {
+      @apply flex w-full min-w-0 max-w-none! items-start justify-between gap-4 border-b border-surface-muted py-[0.45rem] text-right;
+    }
+
+    .data-table td:last-child {
+      @apply border-b-0;
+    }
+
+    .data-table td::before {
+      content: attr(data-label);
+      @apply shrink-0 text-left text-[0.7rem] font-bold tracking-[0.04em] text-text-muted uppercase;
+    }
+  }
+
+  .sortable-th {
+    @apply inline-flex w-full cursor-pointer items-center gap-[0.15rem] border-0 bg-transparent px-[0.85rem] py-[0.9rem] text-left text-inherit uppercase transition-colors duration-160 hover:bg-[rgba(245,158,11,0.18)] hover:text-white;
+    font: inherit;
+    letter-spacing: inherit;
+  }
+
+  .sortable-th.active {
+    @apply text-[#fde68a];
+  }
+
+  .sort-indicator {
+    @apply text-[0.7rem] opacity-70;
+  }
+
+  .sortable-th.active .sort-indicator {
+    @apply opacity-100;
+  }
+}
