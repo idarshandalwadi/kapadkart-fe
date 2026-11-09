@@ -401,6 +401,12 @@ function BookingPage() {
         sent: 'Dispatched (Sent)',
         returned: 'Returned',
         cancelled: 'Cancelled',
+        pickup_today: "Today's pickups",
+        due_today: "Today's returns",
+        upcoming_delivery: 'Pickups in the next 15 days',
+        overdue: 'Overdue returns',
+        created_today: 'Bookings created today',
+        outstanding: 'Outstanding due',
       }
       activeChips.push({ key: 'status', label: `Status: ${statusLabels[statusFilter] || statusFilter}`, onRemove: () => applyStatusFilter('') })
     }

@@ -458,7 +458,15 @@ function ProductsPage() {
             ? [
                 {
                   key: 'stock',
-                  label: `Stock: ${stock}`,
+                  label: `Stock: ${
+                    {
+                      in_stock: 'In stock',
+                      low_stock: 'Low stock',
+                      out_of_stock: 'Out of stock',
+                      alerts: 'Stock alerts',
+                      available: 'In hand',
+                    }[stock] || stock
+                  }`,
                   onRemove: () => handleStockChipClick(''),
                 },
               ]

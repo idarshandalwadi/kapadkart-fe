@@ -28,6 +28,13 @@ function formatInr(value) {
   return `₹${Number(value || 0).toLocaleString('en-IN')}`
 }
 
+function todayIsoDate() {
+  const now = new Date()
+  const month = String(now.getMonth() + 1).padStart(2, '0')
+  const day = String(now.getDate()).padStart(2, '0')
+  return `${now.getFullYear()}-${month}-${day}`
+}
+
 function DashboardSection({ icon, iconWrapClass, title, subtitle, children, headerRight }) {
   return (
     <section className="bg-surface border border-border rounded-2xl p-5 sm:p-6 shadow-md space-y-5">
@@ -145,6 +152,7 @@ function DashboardPage() {
   const businessType = String(rawBusinessType).toUpperCase()
   const isRentalAllowed = businessType !== 'SALES'
   const isSalesAllowed = businessType !== 'RENTAL'
+  const todaySalesTo = `${path('/sales')}?from=${todayIsoDate()}&to=${todayIsoDate()}&status=completed`
 
   const [summary, setSummary] = useState(null)
   const [chartDays, setChartDays] = useState(30)
@@ -304,7 +312,7 @@ function DashboardPage() {
                   <KpiTile
                     to={`${path('/booking')}?status=pickup_today`}
                     label="Today’s booking"
-                    hint="Advance bookings for pickup today"
+                    hint="Pickups scheduled for today"
                     icon="fa-calendar-plus"
                     iconClass="bg-blue-500/10 text-blue-600"
                     valueClass="text-[1.75rem] text-blue-600 dark:text-blue-400"
@@ -326,7 +334,7 @@ function DashboardPage() {
                   <KpiTile
                     to={`${path('/booking')}?status=upcoming_delivery`}
                     label="Incoming delivery"
-                    hint="Pickups in 7–15 days"
+                    hint="Pickups in the next 15 days"
                     icon="fa-truck"
                     iconClass="bg-indigo-500/10 text-indigo-600"
                     valueClass="text-[1.75rem] text-indigo-600 dark:text-indigo-400"
@@ -354,7 +362,7 @@ function DashboardPage() {
               ) : (
                 <div className="grid grid-cols-2 gap-3 xl:grid-cols-4" aria-label="Operational overview">
                   <KpiTile
-                    to={path('/sales')}
+                    to={todaySalesTo}
                     label="Today's sales"
                     hint="Completed transactions today"
                     icon="fa-receipt"
@@ -365,9 +373,9 @@ function DashboardPage() {
                   </KpiTile>
 
                   <KpiTile
-                    to={path('/products')}
+                    to={`${path('/products')}?stock=available`}
                     label="Available in stock"
-                    hint="Units ready to sell"
+                    hint="Products with stock on hand"
                     icon="fa-box-open"
                     iconClass="bg-blue-500/10 text-blue-600"
                     valueClass="text-[1.75rem] text-blue-600 dark:text-blue-400"
@@ -387,7 +395,7 @@ function DashboardPage() {
                   </KpiTile>
 
                   <KpiTile
-                    to={path('/sales')}
+                    to={todaySalesTo}
                     label="Today's POS revenue"
                     hint="Direct sales collection"
                     icon="fa-cash-register"
@@ -415,7 +423,7 @@ function DashboardPage() {
               >
                 {isSalesAllowed && (
                   <KpiTile
-                    to={path('/sales')}
+                    to={todaySalesTo}
                     label="Today’s sales revenue"
                     hint={`${kpis.completed_sales_count} sales completed`}
                     icon="fa-cash-register"
@@ -428,9 +436,9 @@ function DashboardPage() {
 
                 {isRentalAllowed && (
                   <KpiTile
-                    to={path('/booking')}
+                    to={`${path('/booking')}?status=created_today`}
                     label="Today’s rental revenue"
-                    hint="From rental bookings"
+                    hint="Collected on bookings created today"
                     icon="fa-key"
                     iconClass="bg-amber-500/10 text-amber-600"
                     valueClass="text-[1.85rem] text-amber-600 dark:text-amber-400"
@@ -441,7 +449,7 @@ function DashboardPage() {
 
                 {isRentalAllowed && (
                   <KpiTile
-                    to={path('/booking')}
+                    to={`${path('/booking')}?status=outstanding`}
                     label="Outstanding due (Baki)"
                     hint="Customer receivable balance"
                     icon="fa-scale-unbalanced"

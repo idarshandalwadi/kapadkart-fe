@@ -296,8 +296,8 @@
 
 /* Amounts Panel */
 .bill-print-preview .bill-amounts {
-  margin-top: 0.75rem;
-  padding-top: 0.6rem;
+  margin-top: 1.75rem;
+  padding-top: 0.85rem;
   border-top: 1px solid #dddddd;
 }
 
@@ -1078,8 +1078,8 @@
 
   /* ── Payment Summary ───────────────────────────────── */
   .bill-amounts {
-    margin-top: 0.5rem;
-    padding-top: 0.4rem;
+    margin-top: 1.75rem;
+    padding-top: 0.85rem;
     border-top: 1px solid #cccccc;
   }
 

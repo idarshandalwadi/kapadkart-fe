@@ -133,10 +133,10 @@ export default function SystemHealthStrip({ health, loading, onRefresh }) {
             />
             <div className="min-w-0">
               <div className="text-xs font-semibold text-slate-900">SMTP Mailer</div>
-              <div className="text-[0.7rem] text-slate-500 truncate">
-                {health?.smtp?.provider
-                  ? `${health.smtp.provider.toUpperCase()} (${health.smtp.host || 'active'})`
-                  : 'Not Configured'}
+              <div className="text-[0.7rem] text-slate-500 truncate" title={health?.smtp?.error || undefined}>
+                {health?.smtp?.status === 'ok'
+                  ? `${health.smtp.provider || 'SMTP'} (${health.smtp.host || 'active'})`
+                  : health?.smtp?.error || 'Not Configured'}
               </div>
             </div>
           </div>

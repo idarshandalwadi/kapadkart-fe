@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 import { toast } from 'sonner'
 import { fetchSales, updateSale } from '@/features/sell/api/sales'
 import SaleBillPrint from '@/features/sell/components/SaleBillPrint'
@@ -105,6 +105,7 @@ function saleToPrintForm(sale) {
 
 function SalesPage() {
   const { path, slug } = useTenant()
+  const [searchParams] = useSearchParams()
   const {
     visibleKeys,
     visibleColumns,
@@ -114,9 +115,9 @@ function SalesPage() {
   const [page, setPage] = useState(1)
   const [limit, setLimit] = useState(20)
   const [search, setSearch] = useState('')
-  const [from, setFrom] = useState('')
-  const [to, setTo] = useState('')
-  const [statusFilter, setStatusFilter] = useState('')
+  const [from, setFrom] = useState(() => searchParams.get('from') || '')
+  const [to, setTo] = useState(() => searchParams.get('to') || '')
+  const [statusFilter, setStatusFilter] = useState(() => searchParams.get('status') || '')
 
   const debouncedSearch = useDebouncedValue(search)
 

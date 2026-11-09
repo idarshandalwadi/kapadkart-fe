@@ -263,10 +263,10 @@ export default function EmailLogsPage() {
     setTestingConnection(true)
     try {
       const res = await testSmtpConnection()
-      if (res.data?.connected) {
-        toast.success(`SMTP connection verified successfully (${res.data.provider || 'smtp'})`)
+      if (res.status === 'success' || res.data?.connected) {
+        toast.success(res.message || `SMTP connection verified successfully (${res.data?.provider || 'smtp'})`)
       } else {
-        toast.error(`SMTP connection failed: ${res.data?.error || 'Unknown error'}`)
+        toast.error(res.data?.error || res.message || 'SMTP connection failed')
       }
     } catch (err) {
       if (err?.silent) return
