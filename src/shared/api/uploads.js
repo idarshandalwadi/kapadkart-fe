@@ -29,3 +29,14 @@ export function uploadProductImage(file, filename = 'product.jpg') {
 export function uploadTemplate(file, filename = 'bill.html') {
   return uploadAsset('templates', file, filename)
 }
+
+/**
+ * Delete an uploaded object that was removed before it was saved on a record.
+ * Saved logos and product images are deleted by the API when the form is saved.
+ */
+export function removeUploadedAsset(url) {
+  return authFetch('/api/uploads/remove', {
+    method: 'POST',
+    body: JSON.stringify({ url }),
+  })
+}

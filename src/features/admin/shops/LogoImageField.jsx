@@ -145,7 +145,7 @@ export default function LogoImageField({
     onChange('')
     setError(null)
     if (inputRef.current) inputRef.current.value = ''
-    toast.success('Logo removed')
+    toast.success('Logo removed — save the shop to apply')
   }
 
   return (

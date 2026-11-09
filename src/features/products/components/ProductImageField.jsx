@@ -9,7 +9,7 @@ import {
 } from '@/features/products/utils/cropImage'
 import { getProductImageUrl } from '@/config/api'
 import { MAX_PRODUCT_IMAGES } from '@/features/products/utils/productImages'
-import { uploadProductImage } from '@/shared/api/uploads'
+import { removeUploadedAsset, uploadProductImage } from '@/shared/api/uploads'
 import { cn } from '@/shared/utils/cn'
 
 const ACCEPTED = 'image/jpeg,image/png,image/webp,image/gif'
@@ -28,6 +28,7 @@ function ProductImageField({ value = [], onChange, product }) {
   const inputRef = useRef(null)
   const queueRef = useRef([])
   const replaceIndexRef = useRef(null)
+  const sessionUploadsRef = useRef(new Set())
   const editorCleanupRef = useRef(null)
 
   const [dragging, setDragging] = useState(false)
@@ -186,10 +187,19 @@ function ProductImageField({ value = [], onChange, product }) {
         `product.${extensionForMime(mimeType)}`,
       )
       const url = uploaded.url
+      sessionUploadsRef.current.add(url)
 
       const current = imagesRef.current
       const replaceIndex = replaceIndexRef.current
+      const discardUnsaved = (previousUrl) => {
+        if (!previousUrl || !sessionUploadsRef.current.has(previousUrl) || previousUrl === url) return
+        sessionUploadsRef.current.delete(previousUrl)
+        removeUploadedAsset(previousUrl).catch(() => {
+          toast.error('Could not delete that image from storage.')
+        })
+      }
       if (replaceIndex != null) {
+        discardUnsaved(current[replaceIndex])
         const next = current.map((img, i) => (i === replaceIndex ? url : img))
         imagesRef.current = next
         onChange(next)
@@ -213,6 +223,13 @@ function ProductImageField({ value = [], onChange, product }) {
   }
 
   const removeAt = (index) => {
+    const removed = images[index]
+    if (removed && sessionUploadsRef.current.has(removed)) {
+      sessionUploadsRef.current.delete(removed)
+      removeUploadedAsset(removed).catch(() => {
+        toast.error('Could not delete that image from storage.')
+      })
+    }
     onChange(images.filter((_, i) => i !== index))
     setError(null)
     if (inputRef.current) inputRef.current.value = ''

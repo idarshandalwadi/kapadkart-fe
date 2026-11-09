@@ -7,7 +7,7 @@ import {
   isImageFile,
   readFileAsDataUrl,
 } from '@/features/products/utils/cropImage'
-import { uploadBrandingLogo } from '@/shared/api/uploads'
+import { removeUploadedAsset, uploadBrandingLogo } from '@/shared/api/uploads'
 import BrandLogo from '@/shared/components/BrandLogo'
 import ConfirmDialog from '@/shared/components/ConfirmDialog'
 import { resolveBrandAssetUrl } from '@/shared/tenant/tenant'
@@ -15,9 +15,10 @@ import { cn } from '@/shared/utils/cn'
 
 const ACCEPTED = 'image/jpeg,image/png,image/webp,image/gif'
 
-function LogoImageField({ value = '', onChange }) {
+function LogoImageField({ value = '', committedValue = '', onChange }) {
   const inputId = useId()
   const inputRef = useRef(null)
+  const sessionUploadsRef = useRef(new Set())
 
   const [dragging, setDragging] = useState(false)
   const [error, setError] = useState(null)
@@ -30,6 +31,18 @@ function LogoImageField({ value = '', onChange }) {
   const [removeConfirmOpen, setRemoveConfirmOpen] = useState(false)
 
   const previewSrc = resolveBrandAssetUrl(value) || value
+
+  useEffect(() => {
+    if (committedValue) sessionUploadsRef.current.delete(committedValue)
+  }, [committedValue])
+
+  const discardUnsavedUpload = (url) => {
+    if (!url || url === committedValue || !sessionUploadsRef.current.has(url)) return
+    sessionUploadsRef.current.delete(url)
+    removeUploadedAsset(url).catch(() => {
+      toast.error('Could not delete that logo from storage.')
+    })
+  }
 
   useEffect(() => {
     if (!editorSrc) return undefined
@@ -97,6 +110,8 @@ function LogoImageField({ value = '', onChange }) {
         minEdge: 200,
       })
       const uploaded = await uploadBrandingLogo(blob, `logo.${extensionForMime(mimeType)}`)
+      sessionUploadsRef.current.add(uploaded.url)
+      discardUnsavedUpload(value)
       onChange(uploaded.url)
       setEditorSrc(null)
       toast.success('Logo uploaded — save settings to apply')
@@ -110,6 +125,7 @@ function LogoImageField({ value = '', onChange }) {
   }
 
   const handleConfirmRemove = () => {
+    discardUnsavedUpload(value)
     onChange('')
     setError(null)
     if (inputRef.current) inputRef.current.value = ''

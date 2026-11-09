@@ -32,6 +32,7 @@ export default defineConfig({
           /^\/uploads\//,
           /^\/images\//,
           /^\/b\//,
+          /\.webmanifest$/,
           new RegExp(`^${basePath}/api/`),
           new RegExp(`^${basePath}/uploads/`),
           new RegExp(`^${basePath}/images/`),

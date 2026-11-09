@@ -385,6 +385,7 @@ function SettingsPage() {
                 {/* Logo uploader */}
                 <LogoImageField
                   value={settingsForm.logo_url}
+                  committedValue={initialForm.logo_url}
                   onChange={(logo_url) => {
                     setSettingsForm((prev) => ({ ...prev, logo_url }))
                     setSettingsError(null)

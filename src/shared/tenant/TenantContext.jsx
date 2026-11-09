@@ -67,7 +67,7 @@ function applyBrandingToDocument(branding) {
   }
   themeMeta.content = themeColor
 
-  const appleTitle = company.slice(0, 16)
+  const appleTitle = title.slice(0, 16)
   let appleTitleMeta = document.querySelector("meta[name='apple-mobile-web-app-title']")
   if (!appleTitleMeta) {
     appleTitleMeta = document.createElement('meta')
