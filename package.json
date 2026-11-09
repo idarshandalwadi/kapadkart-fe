@@ -9,7 +9,7 @@
     "lint": "oxlint",
     "preview": "vite preview",
     "deploy": "npm run build && npx wrangler pages deploy dist --project-name kapadkart",
-    "test": "node scripts/test-exports.js && node scripts/test-routing-prefix.js && node scripts/test-support-security.js && node scripts/test-alert-accessibility.js && node scripts/test-modals-and-sales-flow.js",
+    "test": "node scripts/test-exports.js && node scripts/test-routing-prefix.js && node scripts/test-support-security.js && node scripts/test-alert-accessibility.js && node scripts/test-modals-and-sales-flow.js && node scripts/test-pages-proxy.js",
     "test:exports": "node scripts/test-exports.js",
     "test:routing": "node scripts/test-routing-prefix.js",
     "test:security": "node scripts/test-support-security.js",

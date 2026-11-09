@@ -34,23 +34,15 @@ The dev server uses port 5173 and will not fall back to another port (`strictPor
 
 ## Production build
 
-Copy `.env.example` to `.env` and set the public API origin:
-
-```env
-VITE_BASE_PATH=/
-VITE_API_BASE_URL=https://www.api.kapadkart.mohammadaman.in
-VITE_BACKEND_URL=http://localhost:4000
-VITE_DEFAULT_TENANT_SLUG=demo-shop
-```
+`.env.production` leaves `VITE_API_BASE_URL` empty. The published site is HTTPS, and the API at `http://13.234.170.148/kapadkart/api/v1/` is HTTP, so the browser cannot call that host directly. `functions/` proxies `/api`, `/uploads`, and `/images` to it and inserts `/v1`.
 
 ```bash
-npm run build
-npm run preview
+npm run deploy
 ```
 
 `VITE_*` values are embedded in the browser bundle. Do not put secrets in this project's env files.
 
-`VITE_BACKEND_URL` is used only by the Vite dev proxy. Production traffic uses `VITE_API_BASE_URL`.
+`VITE_BACKEND_URL` is used only by the Vite dev proxy.
 
 ## Routes
 
@@ -60,7 +52,7 @@ npm run preview
 | http://localhost:5173/login | Shop login |
 | http://localhost:5173/t/:tenantSlug/dashboard | Shop dashboard after login |
 
-The tenant slug comes from the URL (`/t/:slug`), then from the saved session, then from `VITE_DEFAULT_TENANT_SLUG`. A shop exists only after it is created in the admin panel. The API seed creates a platform admin, not a demo shop.
+The tenant slug comes from the URL (`/t/:slug`), then from the saved session, then from `VITE_DEFAULT_TENANT_SLUG`. The API seed creates the shop `khodal-mahakali-shop` with owner `khodal@kapadkart.com`.
 
 ## Scripts
 

@@ -1,8 +1,6 @@
 # Cloudflare Pages project for the shop app.
-# Build env vars (Pages → Settings → Environment variables) must include:
-#   VITE_BASE_PATH=/
-#   VITE_API_BASE_URL=https://<api-host>
-# Vite inlines VITE_* at build time.
+# Production builds leave VITE_API_BASE_URL empty (.env.production).
+# functions/ proxies /api to http://13.234.170.148/kapadkart/api/v1.
 #
 #   npm run deploy
 
